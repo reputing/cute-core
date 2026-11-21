@@ -77,7 +77,18 @@ when the tab has been idle.
 
 ## Mascot from a brand
 
-When the site has a mascot or logo animal, map it instead of inventing one:
+**If the site has mascot art, use the art.** Image mode gives the brand's own
+character every behaviour (walk, look tilt, hop, squash, happy wiggle, glow
+outline, ground shadow, speech bubble, heart burst):
+
+```js
+createMascot({ image: "/mascot/loving.png", behavior: "peek", perch: "#guestbook",
+  size: 150, faces: "front", outline: 0.03, colors: { ink: "#ff9ed8" } });   // ink = glow outline colour
+```
+`faces: "left" | "right"` mirrors the art to face its walking direction;
+`pixelated: true` for pixel art. Use a transparent PNG/WebP.
+
+Only when there is no art, map the brand to an SDF species instead of inventing one:
 1. Find it: favicon, logo, hero art, the name (kuro = black cat; chessie = cat;
    blushie = pink blob with a bow).
 2. Pick the nearest species and accessory; sample its colours into `colors`

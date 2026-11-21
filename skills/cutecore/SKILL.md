@@ -53,6 +53,34 @@ link, route, data source and piece of content from the original is still there
 and still works. Nothing gets removed or simplified unless the user explicitly
 asked for that removal. That is the rule the user cares about most.
 
+## 2b. Lock the brand when the site already has one
+
+If you are redesigning an existing site or app (kuro.rip, the user's own
+project), its art direction is not yours to replace. Before any variant:
+
+```bash
+node $CC/scripts/dissect.cjs <live url> --interact            # look at desktop-fold.png first
+python3 $CC/scripts/brand.py extract .cutecore/dissect/<host>/blueprint.json --repo . --out .cutecore/brand
+```
+
+Read `.cutecore/brand/brand.md` and load `brand.css` after `cute-tokens.css`.
+From then on the **brand owns** palette, type, mood (dark/light), illustration,
+ornaments and mascot; the **house style owns** craft: states, motion
+discipline, primitives, layout invention, anti-slop. Concretely:
+- never introduce a palette the site does not have (no "dusk rose", no
+  strawberry paper on a violet night site); derive tints with `color-mix` from
+  the brand colours,
+- keep the display, UI and handwriting faces it uses,
+- reuse its illustrations, ornaments and textures; never swap them for generic
+  shapes, and never put the generic SDF mascot on a site that has its own:
+  `createMascot({ image: "<their mascot png>" })` gives their character the behaviours,
+- a redesign must be at least as rich as what is live: if the current site has
+  an illustrated scene, neon doodles and string lights, a variant made of flat
+  boxes is a downgrade, whatever its layout.
+
+Only deviation 8+ AND an explicit "the identity can change too" from the user
+unlocks palette or art direction.
+
 ## 3. Understand the job
 
 Pick the path, then read only the references it needs:
@@ -88,17 +116,28 @@ For a site rebuild, snapshot from its blueprint (`snapshot-url`).
 ## 5. Make the variants
 
 ```bash
-python3 $CC/scripts/variants.py plan --deviation <n> --count <k> --project <name>
+python3 $CC/scripts/variants.py plan --deviation <n> --count <k> --project <name> [--brand .cutecore/brand/brand.json]
 ```
+With `--brand`, materials are limited to ones that fit the brand and identity stays locked.
 This gives each variant a different layout model, material, motion personality
 and signature moment, so five results are five ideas. Build each variant as its
 own file or route (`.cutecore/variants/v1/...`). With the Agent tool available,
 build variants in parallel subagents, each given the plan line, the house style
 reference and the gates in step 6; otherwise build them one after another.
 
+**What a variant is.** A variant is a real screen of the product, built with
+real content, never a component spec sheet, swatch board or kitchen-sink page.
+Users judge designs by looking at their own pages; a grid of tiny buttons and
+inputs tells them nothing and looks generic at gallery size. For a design
+system or a whole-site redesign, each variant is the same two or three real
+screens (for kuro: the landing hero and the dashboard/editor, plus one inner
+page), each rendered in that variant's system. The component inventory comes
+later, extracted from the variant the user picks.
+
 Building rules for every variant:
 - Tokens from `assets/cute-tokens.css` (copy it into the project, or map its
-  variables into the project's theme). Pink, purple and blue flavours; light and
+  variables into the project's theme), plus `brand.css` when the site has a
+  brand (step 2b). Without a brand: pink, purple and blue flavours; light and
   dark; motion toggle.
 - Icons only from 21st: `python3 $CC/scripts/icons21.py get|pack|cute-pack ...`.
   Never hand write an icon path. Illustrations and doodles you draw are fine:
@@ -123,6 +162,14 @@ Fix every error. Then screenshot each variant at 1440 and 390
 (`variants.py shots`, needs a local server for module pages) and look at the
 images yourself: if two variants look alike, change one.
 
+**Never downgrade.** Put each variant's screenshot next to the current live
+screen at the same width. Throw a variant away and rebuild it if, compared
+with what is live, it is: flatter (lost illustration, glow, texture or depth),
+murkier (muddier or lower contrast colours), more generic (boxes in a grid
+where the site had a scene), smaller in personality (lost the mascot, the
+handwritten type, the ornaments), or harder to read at gallery size. The user
+should look at every variant and think it beats the current site.
+
 Uniqueness check, in your head, for each variant: could this be mistaken for a
 template, a SaaS landing page, or one of the curated sites with the colours
 swapped? If yes, push the metaphor further at the level the user allowed.
@@ -130,9 +177,12 @@ swapped? If yes, push the metaphor further at the level the user allowed.
 ## 7. Let the user pick
 
 ```bash
-python3 $CC/scripts/variants.py gallery .cutecore/variants/v*/index.html --labels "..." --out .cutecore/variants/index.html
+python3 $CC/scripts/variants.py gallery .cutecore/variants/v*/index.html --labels "..." \
+  --before .cutecore/dissect/<host>/desktop-fold.png --out .cutecore/variants/index.html
 ```
-Show the gallery (or the screenshots) and ask which number wins, plus what they
+The current site goes first as "0, the bar to beat". In chat, show each variant's
+screenshot large (one image per variant, desktop only), not a grid of thumbnails,
+and say in one line what is different about it. Show the gallery (or the screenshots) and ask which number wins, plus what they
 love or hate in the others. AskUserQuestion holds four options; with five
 variants, list all five in your message and let the user answer with a number.
 

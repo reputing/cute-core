@@ -1,5 +1,11 @@
 # House style: sticker postcard
 
+Scope: this is the default look for new or unbranded work. When a site already
+has an art direction (kuro.rip, the user's own project), run `brand.py` first
+(SKILL.md step 2b): the brand keeps its palette, type, art and mascot, and this
+house style contributes its craft (states, press physics, primitives, motion
+rules) wearing the brand's colours via `brand.css`.
+
 The default look of everything this skill makes. It follows chessie.cat's
 guestbook closely (the user's chosen anchor) and expands it with flavours,
 mascots, shaders and the patterns from the other curated sites. The tokens and

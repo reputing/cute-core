@@ -14,6 +14,10 @@
  * accessory  none | bow | flower | sprout | star
  * size       css px (120)
  * hearts     glyph used for the click burst ("♡")
+ * image      url of the site's OWN mascot art (png/webp with transparency). When the brand
+ *            has a mascot, use this instead of a generic species: same behaviours, their character.
+ *            faces: "front" | "left" | "right" (mirrors when walking), outline: glow width (0.035),
+ *            colors.ink = outline/glow colour, pixelated: true for pixel art
  *
  * The body is ray marched signed distance fields with a toon light, a sticker
  * outline and a ground shadow, so it renders crisp at any size with no assets.
@@ -209,6 +213,33 @@ void main(){
   gl_FragColor = vec4(col.rgb * col.a, col.a);
 }`;
 
+// Brand art mode: the site's own mascot image gets the same behaviours (walk, look, hop, squash, glow outline).
+const FRAG_IMG = `precision highp float;
+uniform vec2 uRes; uniform float uTime; uniform vec2 uLook; uniform float uWalk; uniform float uSquash; uniform float uJump; uniform float uHappy; uniform float uFlip;
+uniform sampler2D uTex; uniform vec3 uInk; uniform float uOutlineW; uniform float uAspect;
+void main(){
+  vec2 uv = gl_FragCoord.xy / uRes;
+  vec2 p = uv - vec2(0.5, 0.07);
+  float bob = abs(sin(uTime * 9.0)) * 0.035 * uWalk + sin(uTime * 2.0) * 0.008;
+  p.y -= uJump * 0.35 + bob;
+  float sq = uSquash * 0.18; p.y /= (1.0 - sq); p.x /= (1.0 + sq * 0.7);
+  float tilt = sin(uTime * 9.0) * 0.07 * uWalk + uLook.x * 0.08 + (uHappy > 0.5 ? sin(uTime * 14.0) * 0.09 : 0.0);
+  p = mat2(cos(tilt), -sin(tilt), sin(tilt), cos(tilt)) * p;
+  p.x *= uFlip;
+  vec2 size = uAspect >= 1.0 ? vec2(0.84, 0.84 / uAspect) : vec2(0.84 * uAspect, 0.84);
+  vec2 t = vec2(p.x / size.x + 0.5, p.y / size.y);
+  vec2 tuv = vec2(t.x, 1.0 - t.y);
+  float inside = step(0.0, t.x) * step(t.x, 1.0) * step(0.0, t.y) * step(t.y, 1.0);
+  vec4 c = texture2D(uTex, tuv) * inside;
+  float a = 0.0;
+  for (int i = 0; i < 12; i++) { float an = float(i) * 0.5236; vec2 q = tuv + vec2(cos(an), sin(an)) * uOutlineW / size;
+    a = max(a, texture2D(uTex, q).a * step(0.0, q.x) * step(q.x, 1.0) * step(0.0, q.y) * step(q.y, 1.0)); }
+  float ol = a * (1.0 - c.a) * 0.9;
+  vec4 col = vec4(c.rgb * c.a + uInk * ol, c.a + ol);
+  float sh = smoothstep(1.0, 0.2, length(vec2((uv.x - 0.5) / 0.3, (uv.y - 0.06) / 0.03))) * 0.2 * (1.0 - clamp(uJump * 2.0, 0.0, 0.8));
+  gl_FragColor = col + vec4(uInk * sh, sh) * (1.0 - col.a);
+}`;
+
 const VERT = `attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }`;
 
 function rgb(hex) {
@@ -245,13 +276,26 @@ export function createMascot(options = {}) {
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error("mascot: " + gl.getShaderInfoLog(s)); return s; };
   const prog = gl.createProgram();
-  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, o.image ? FRAG_IMG : FRAG));
   gl.bindAttribLocation(prog, 0, "aPos"); gl.linkProgram(prog); gl.useProgram(prog);
   const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
   gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
   gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-  const U = {}; for (const n of ["uRes", "uTime", "uLook", "uWalk", "uYaw", "uSquash", "uBlink", "uJump", "uHappy", "uBody", "uBelly", "uEar", "uBlush", "uInk", "uAcc", "uSpecies", "uAccessory"]) U[n] = gl.getUniformLocation(prog, n);
+  const U = {}; for (const n of ["uRes", "uTime", "uLook", "uWalk", "uYaw", "uSquash", "uBlink", "uJump", "uHappy", "uBody", "uBelly", "uEar", "uBlush", "uInk", "uAcc", "uSpecies", "uAccessory", "uTex", "uOutlineW", "uAspect", "uFlip"]) U[n] = gl.getUniformLocation(prog, n);
+  let texReady = !o.image, aspect = 1;
+  if (o.image) {
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+    const img = new Image(); img.crossOrigin = "anonymous";
+    img.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, o.pixelated ? gl.NEAREST : gl.LINEAR], [gl.TEXTURE_MAG_FILTER, o.pixelated ? gl.NEAREST : gl.LINEAR], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+      aspect = img.naturalWidth / Math.max(1, img.naturalHeight); texReady = true;
+    };
+    img.src = o.image;
+  }
   const setColors = () => { const c = o.colors; gl.uniform3fv(U.uBody, rgb(c.body)); gl.uniform3fv(U.uBelly, rgb(c.belly)); gl.uniform3fv(U.uEar, rgb(c.ear)); gl.uniform3fv(U.uBlush, rgb(c.blush)); gl.uniform3fv(U.uInk, rgb(c.ink)); gl.uniform3fv(U.uAcc, rgb(c.accessory)); };
   setColors();
 
@@ -305,6 +349,7 @@ export function createMascot(options = {}) {
     S.walk += ((speed > 20 ? 1 : 0) - S.walk) * Math.min(1, dt * 8);
     const facing = Math.abs(dx) > 3 && speed > 20 ? Math.sign(dx) * 0.55 : ((S.mouse[0] - S.x) / innerWidth) * 0.9;
     S.yaw += (facing - S.yaw) * Math.min(1, dt * 6);
+    if (speed > 20 && Math.abs(dx) > 3) S.dir = Math.sign(dx);
 
     // look at cursor from the head position
     const hx = S.x, hy = S.y - o.size * 0.62;
@@ -334,7 +379,12 @@ export function createMascot(options = {}) {
     gl.uniform1f(U.uWalk, S.walk); gl.uniform1f(U.uYaw, S.yaw); gl.uniform1f(U.uSquash, S.squash);
     gl.uniform1f(U.uBlink, S.blink > 0.5 ? 1 : 0); gl.uniform1f(U.uJump, S.jump); gl.uniform1f(U.uHappy, S.happy > 0.05 ? 1 : 0);
     gl.uniform1f(U.uSpecies, SPECIES[o.species] ?? 0); gl.uniform1f(U.uAccessory, ACCESSORY[o.accessory] ?? 0);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (o.image) {
+      const faces = o.faces || "front"; // the way the art faces: front | left | right
+      gl.uniform1f(U.uFlip, faces === "front" ? 1 : (S.dir || 1) * (faces === "right" ? 1 : -1));
+      gl.uniform1i(U.uTex, 0); gl.uniform1f(U.uAspect, aspect); gl.uniform1f(U.uOutlineW, o.outline ?? 0.035);
+    }
+    if (texReady) gl.drawArrays(gl.TRIANGLES, 0, 3);
     raf = requestAnimationFrame(step);
   }
   raf = requestAnimationFrame(step);

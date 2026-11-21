@@ -20,6 +20,7 @@ import html
 import json
 import os
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -57,13 +58,23 @@ def disliked_words(project):
     return {w.strip().lower() for x in picks for w in (x.get("disliked") or "").split(",") if w.strip()}
 
 
-def plan(deviation, count, seed, avoid=()):
+BRAND_MATERIALS = {
+    "dark": ["neon doodle glow on night velvet", "night glass framing the brand's illustrated scene", "plush felt with soft glow",
+             "candy pills on velvet panels", "polaroid and tape scrapbook", "pixel LCD in the brand palette", "holo foil accents on night paper"],
+    "light": ["sticker paper", "milk glass frame", "plush felt", "polaroid and tape scrapbook", "doodle sketchbook", "holo foil accents", "pixel LCD in the brand palette"],
+}
+
+
+def plan(deviation, count, seed, avoid=(), brand=None):
     rnd = random.Random(seed)
+    axes = dict(AXES)
+    if brand:
+        axes["material"] = BRAND_MATERIALS[brand.get("mode", "light")]
     lo = 0 if deviation <= 4 else 1
     out, used = [], {k: set() for k in AXES}
     for i in range(count):
         d = {}
-        for k, opts in AXES.items():
+        for k, opts in axes.items():
             pool = [o for o in opts[lo:] if o not in used[k] and not any(w in o.lower() for w in avoid)] or opts
             if deviation <= 3 and k == "layout":
                 pool = ["keep the existing layout"]
@@ -77,10 +88,16 @@ def plan(deviation, count, seed, avoid=()):
 
 def cmd_plan(a):
     print(f"deviation {a.deviation}: {LEVELS[a.deviation]}\n")
+    brand = json.load(open(a.brand)) if a.brand else None
+    if brand:
+        f = brand["fonts"]; pal = brand["palette"]
+        print(f"brand locked ({brand['site']}): palette bg {pal['bg']} ink {pal['text']} accent {pal['accent']} glow {pal['glow']}; "
+              f"type {f.get('display')} / {f.get('ui')} / {f.get('hand')}; reuse its art ({len(brand.get('art', []))} assets)\n"
+              "variants differ in structure, composition, treatment and motion, never in identity\n")
     avoid = disliked_words(a.project)
     if avoid:
         print("steering away from (taste memory): " + ", ".join(sorted(avoid)) + "\n")
-    for i, d in enumerate(plan(a.deviation, a.count, a.seed, avoid), 1):
+    for i, d in enumerate(plan(a.deviation, a.count, a.seed, avoid, brand), 1):
         print(f"variant {i}: layout = {d['layout']}; material = {d['material']}; motion = {d['motion']}; signature = {d['moment']}")
     print("\nEvery variant keeps every feature. Run feature_guard.py compare on each before showing it.")
 
@@ -90,6 +107,11 @@ def cmd_gallery(a):
     labels = [l.strip() for l in a.labels.split(",")] if a.labels else []
     base = os.path.dirname(os.path.abspath(a.out))
     cells = []
+    if a.before:
+        bsrc = a.before if a.before.startswith("http") else os.path.relpath(os.path.abspath(a.before), base)
+        inner = (f'<img src="{html.escape(bsrc)}" alt="current site" style="width:100%;display:block">' if re.search(r"\.(png|jpe?g|webp)$", a.before, re.I)
+                 else f'<iframe src="{html.escape(bsrc)}" loading="lazy" title="current"></iframe>')
+        cells.append(f'<figure class="before"><figcaption><b>0</b> current site (the bar to beat)</figcaption><div class="frame">{inner}</div></figure>')
     for i, p in enumerate(a.pages, 1):
         src = p if p.startswith("http") else os.path.relpath(os.path.abspath(p), base)
         label = html.escape(labels[i - 1] if i - 1 < len(labels) else os.path.basename(os.path.dirname(os.path.abspath(p))))
@@ -103,7 +125,7 @@ h1{{font:700 28px Fredoka,ui-rounded,system-ui;color:var(--accent);margin:0 0 4p
 .bar{{display:flex;gap:8px;margin-bottom:18px}} .bar button{{font:600 14px Fredoka,ui-rounded,system-ui;border:3px solid var(--rim);background:#fff;border-radius:14px;padding:6px 12px;box-shadow:0 2px 0 var(--drop);cursor:pointer}}
 .bar button[aria-pressed=true]{{background:var(--accent);color:#fff}}
 .grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--w,460px),1fr));gap:18px}}
-figure{{margin:0;background:#fff;border:2px solid #f7c6d5;border-radius:22px;box-shadow:0 3px 0 var(--drop);overflow:hidden}}
+figure.before{{outline:3px dashed var(--accent);outline-offset:4px}} figure{{margin:0;background:#fff;border:2px solid #f7c6d5;border-radius:22px;box-shadow:0 3px 0 var(--drop);overflow:hidden}}
 figcaption{{display:flex;gap:10px;align-items:center;padding:10px 14px;font-weight:600}} figcaption b{{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--soft)}} figcaption a{{margin-left:auto;color:var(--accent)}}
 .frame{{height:var(--h,560px);overflow:hidden}} iframe{{border:0;width:var(--iw,1440px);height:calc(var(--h,560px) / var(--k,.32));transform:scale(var(--k,.32));transform-origin:0 0}}
 </style></head><body><h1>Pick a variant</h1><p>Tell Claude the number you like best (and anything you love or hate about the others).</p>
@@ -154,8 +176,9 @@ def cmd_shots(a):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    p = sub.add_parser("plan"); p.add_argument("--deviation", type=int, required=True, choices=range(1, 11)); p.add_argument("--count", type=int, default=5, choices=range(1, 6)); p.add_argument("--seed", type=int, default=None); p.add_argument("--project")
+    p = sub.add_parser("plan"); p.add_argument("--deviation", type=int, required=True, choices=range(1, 11)); p.add_argument("--count", type=int, default=5, choices=range(1, 6)); p.add_argument("--seed", type=int, default=None); p.add_argument("--project"); p.add_argument("--brand", help="brand.json from brand.py: locks palette/type/art")
     p = sub.add_parser("gallery"); p.add_argument("pages", nargs="+"); p.add_argument("--labels"); p.add_argument("--out", default=".cutecore/variants/index.html")
+    p.add_argument("--before", help="screenshot or url of the current site, shown first as the bar to beat")
     p = sub.add_parser("shots"); p.add_argument("pages", nargs="+"); p.add_argument("--out", default=".cutecore/variants")
     a = ap.parse_args(argv)
     if getattr(a, "pages", None) and len(a.pages) > 5:

@@ -39,14 +39,51 @@ Ask which one if the request is ambiguous; the answer changes where code goes.
   `lanternglow`, `firefly`, `mascotFloat`, `mascotBob`, `tapedrift`, `stickyin`,
   `ransomin`, `neonflicker`, `upvotePop`, `decoPop`, curtains (`kopCurtainL/R`).
 
+## Brand lock (what every kuro redesign keeps)
+
+Run `brand.py extract` on a fresh dissect to refresh these; as of Nov 2026:
+
+- **Mood**: dark, a violet night (`#170d27`, `#2b0c2e`) with lavender-white ink
+  (`#f5ecff`), muted ink `#7a7188` / `#b0a6c0`.
+- **Light**: pink `#ffb5df` / `#f58bc8` and lilac `#e6b4ff` / `#eeb5ee` used as
+  *glow*, not as flat fills: neon text shadows (`0 0 6px accent, 0 0 14px accent`),
+  glowing drop-shadow doodles (`drop-shadow(0 0 3px rgba(230,180,255,.95))`).
+- **Primary buttons**: candy pink gradient pills
+  (`linear-gradient(#ffd9f3, #f7b3e3 55%, #ec9ad8)`) with dark ink.
+- **Type**: Darumadrop One for big display words (with a 3px dark offset
+  `0 3px 0 #3d1a52` plus glow), Figtree for UI, Mali italic for handwritten
+  lines, Silkscreen for tiny pixel labels, Fredoka as a secondary rounded face.
+- **Art** (reuse, never replace): `landing-room.webp` (the illustrated night
+  bedroom with window, moon, string lights, curtains, sofa, plush),
+  `brand-cat.png`, `mascot/loving.png` (the cream plush with heart eyes),
+  `sparkle-*.webp`, `heart-outline.webp`, `vine-long.webp`, `butterfly-*.webp`,
+  `scroll-pill.webp`, `shine.png`, neon "kuro" sign, polaroids, bow ornaments.
+- **Texture**: a rough hand-drawn SVG filter (`#kwRough`, `#kwRough2`) on doodles.
+- **Shapes**: lots of circles (round dock icon buttons), pills, small 2 to 5px
+  radii on pixel bits, `50% 50% 45% 45%` blob avatars.
+- **Motion**: twinkles, fireflies, lantern flicker, mascot float/bob, tape drift,
+  neon flicker, pop-ins. Soft and ambient, never bouncy SaaS slide-ins.
+
 ## How the house style lands on kuro
 
-kuro is dark first, chessie is light first. Use the house primitives with the
-`data-theme="dark"` token set (`cute-tokens.css`), tuned toward kuro's violets:
-`--bg #1d0b2b`, `--paper #2a1140`, `--accent #ff8fc8`, `--alt #c8a4ff`,
-`--glow #ff6fb0`. Stickers keep their rim but the rim becomes a lilac line and
-the drop becomes a glow. Keep kuro's own fonts (Figtree UI, Darumadrop display)
-unless the layout is a user page template, where the user picks.
+The house style does not repaint kuro; it brings craft. Load `brand.css` (from
+brand.py) after `cute-tokens.css` so stickers, stamps, cards and fields come out
+in kuro's own colours, glow and type. What the house style adds: complete
+interaction states, the sticker press physics, stamp/postcard/tape primitives
+for guestbook and profile features, invented layouts, the mascot behaviours on
+kuro's own mascot art (`createMascot({ image: "/mascot/loving.png" })`), and
+the anti-slop and feature gates.
+
+A strong kuro variant still shows the illustrated room (or a new scene in the
+same art style) on the landing, glowing handwritten display type, candy pills,
+and the plush mascot. A variant that is flat panels in a muted palette is a
+downgrade and gets thrown away (SKILL.md step 6).
+
+For the dashboard/editor: keep it a calm tool (dense, readable, Figtree), and
+bring the brand in through the frame: night velvet panels with a 1px lilac
+hairline and soft inner glow, candy pills for primary actions, Darumadrop only
+for page titles, the plush peeking from the preview pane, sparkles at the edges
+not behind text.
 
 A user page layout must:
 - read the user's theme variables (colours, font, wallpaper) instead of hardcoding,

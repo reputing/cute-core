@@ -31,6 +31,10 @@ zero tolerance for generic AI layouts.
 - **Discovery**: `cute_scrape.py` crawls outward from the curated sites,
   scores pages for cutecore-ness and keeps a token-only corpus (robots.txt
   respected, no personal data stored).
+- **Brand lock**: redesigning a site that already has a look (like kuro.rip)?
+  `brand.py` extracts its palette, fonts, glow recipes, art and mascot so every
+  variant keeps the identity and only the structure and craft change. Your own
+  mascot art gets the WebGL behaviours via `createMascot({ image })`.
 - **De-AI gates**: `deslop.py` fails on em dashes, serif fonts, hand drawn
   icons and lorem, and warns on SaaS skeletons, stock copy and sameness;
   `feature_guard.py` proves a redesign removed nothing.
@@ -97,6 +101,7 @@ gallery to pick from.
 | `icons21.py` | search, fetch, pack and inline 21st.dev icons (+ doodle, sticker, animate) |
 | `components21.py` | browse / read / search 21st.dev components and libraries, print install commands |
 | `dissect.cjs` | reverse engineer a live page into a blueprint with screenshots |
+| `brand.py` | lock an existing site's palette, type, glow recipes, art and mascot before redesigning it |
 | `cute_scrape.py` | discover cutecore sites from the curated seeds, build a token corpus |
 | `deslop.py` | lint for em dashes, serif, SaaS skeletons, hand drawn icons, lorem |
 | `feature_guard.py` | snapshot features before a redesign, fail if any disappear |
