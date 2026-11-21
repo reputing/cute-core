@@ -1,0 +1,7 @@
+.cutecore/
+__pycache__/
+*.pyc
+node_modules/
+skills/cutecore/package.json
+skills/cutecore/package-lock.json
+skills/cutecore/evals/results/

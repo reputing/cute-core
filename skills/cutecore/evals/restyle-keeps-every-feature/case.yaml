@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: restyle-keeps-every-feature
+expected_outcome: |
+  Claude snapshots features first, restyles boldly, and the final app still has every button, input, handler and storage call from the original.
+context:
+  scaffold_script: place-files.sh

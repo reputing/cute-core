@@ -1,0 +1,8 @@
+{
+  "name": "cutecore",
+  "version": "1.0.0",
+  "description": "Cutecore design engine for Claude: sticker postcard house style, real 21st.dev icons, cutecore spins on every 21st.dev category, WebGL shaders and a WebGL mascot, 1:1 site reverse engineering, anti-slop linting, deviation scale, up to 5 variants and taste memory.",
+  "author": { "name": "reputing" },
+  "repository": "https://github.com/reputing/cute-core",
+  "keywords": ["design", "cutecore", "kawaii", "pastel", "21st.dev", "webgl", "shaders", "mascot", "kuro.rip"]
+}

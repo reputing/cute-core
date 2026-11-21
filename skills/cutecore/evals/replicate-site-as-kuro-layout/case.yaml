@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: replicate-site-as-kuro-layout
+expected_outcome: |
+  Claude dissects the site, writes a spec with tokens, components, motion and data, rebuilds it with fresh code and its own content, keeps every feature, and lists the expansions it added.

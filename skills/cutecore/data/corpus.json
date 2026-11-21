@@ -1,0 +1,579 @@
+{
+  "generated": "2026-11-21T17:17:32Z",
+  "sites": [
+    {
+      "url": "https://doll.gg/",
+      "score": 74.2,
+      "palette": [
+        "#ffffff",
+        "#000000",
+        "#ff91c3",
+        "#ffb4d4",
+        "#ff91c6",
+        "#fff7fb",
+        "#ff84bb",
+        "#fffafd",
+        "#fcf1f7",
+        "#7a4c5c",
+        "#ffe7f2",
+        "#ff69b4",
+        "#ae5582",
+        "#7e5267",
+        "#ffb6c1",
+        "#fff6fb",
+        "#fdeef5",
+        "#ffdbee"
+      ],
+      "hue_mix": {
+        "pastel-pink": 254,
+        "mid-pink": 124,
+        "neutral-light": 109,
+        "neutral-dark": 49,
+        "neutral": 14,
+        "deep-pink": 6
+      },
+      "fonts": [
+        "Georgia",
+        "Comic Sans MS",
+        "Noteworthy",
+        "Arial",
+        "Trebuchet MS",
+        "Chalkboard SE"
+      ],
+      "radii": [
+        "50%",
+        "999px",
+        "0",
+        "20px",
+        "inherit",
+        "4px"
+      ],
+      "glyphs": "✧♡𓏲𝄢⋆˚𐃷",
+      "kaomoji_count": 3,
+      "cute_keyframes": [
+        "entrybubbleborn",
+        "entrybubbleburstflash",
+        "entrybubbleburstfragment",
+        "entrybubbleburstparticle",
+        "entrybubbleburstring",
+        "entrybubblefloat",
+        "entrybubblehintfinger",
+        "entrybubblehintpress",
+        "entrybubblehintwave",
+        "entrybubblepop",
+        "entrypawidle",
+        "entrypawtap",
+        "fairytrailloop",
+        "footerbubbleborn",
+        "footerbubblefloat",
+        "footerbubblepop",
+        "loadingpawstamp",
+        "pinkglitterheart",
+        "postsfetchpaw",
+        "socialcardbubblepop",
+        "sparkleparticlesheart",
+        "tourbubblefloat",
+        "tourbubblein",
+        "tourlabelsoftpop"
+      ],
+      "cute_words": {
+        "doll": 72,
+        "sparkle": 27,
+        "mascot": 26,
+        "doodle": 9,
+        "bunny": 8
+      },
+      "features": {
+        "music_player": true,
+        "pixel_font": true,
+        "reduced_motion": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://chessie.cat/guestbook/",
+      "score": 62.1,
+      "palette": [
+        "#000000",
+        "#ffffff",
+        "#ffd0df",
+        "#b8335f",
+        "#f4afc6",
+        "#6a4459",
+        "#372630",
+        "#3d2230",
+        "#cfbab6",
+        "#6f4a5b",
+        "#f59ab9",
+        "#8f003e",
+        "#f8d8e3",
+        "#fff6f8",
+        "#ffeaf0",
+        "#44303c",
+        "#f7c6d5",
+        "#634656"
+      ],
+      "hue_mix": {
+        "pastel-pink": 27,
+        "neutral-dark": 21,
+        "deep-pink": 14,
+        "mid-pink": 10,
+        "neutral-light": 5,
+        "neutral": 2,
+        "pastel-purple": 2,
+        "deep-purple": 2
+      },
+      "fonts": [
+        "Nunito Variable",
+        "Fredoka Variable",
+        "BlinkMacSystemFont",
+        "SFMono-Regular"
+      ],
+      "radii": [
+        "999px",
+        "1rem",
+        "22px",
+        "14px",
+        "0",
+        "var(--radius-2xl)"
+      ],
+      "glyphs": "",
+      "kaomoji_count": 0,
+      "cute_keyframes": [
+        "backdrop-sparkle",
+        "backdrop-twinkle",
+        "blink",
+        "paw-step",
+        "peek-nod-left",
+        "peek-nod-right",
+        "peek-paws",
+        "peek-rise",
+        "peek-sway",
+        "reaction-pop",
+        "tail-flick"
+      ],
+      "cute_words": {
+        "sparkle": 56,
+        "guestbook": 24,
+        "stamp": 6,
+        "meow": 1
+      },
+      "features": {
+        "guestbook": true,
+        "pixel_font": true,
+        "image_rendering_pixelated": true,
+        "view_transitions": true,
+        "reduced_motion": true,
+        "dark_mode": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://kuro.rip/",
+      "score": 62.1,
+      "palette": [
+        "#ffffff",
+        "#000000",
+        "#ff9ccf",
+        "#ff9fd2",
+        "#f58bc8",
+        "#2a0f30",
+        "#f6e9fb",
+        "#3d1a52",
+        "#cdb6f2",
+        "#ffd6ec",
+        "#ef4444",
+        "#8b70ff",
+        "#22c55e",
+        "#ffa6cf",
+        "#fff5fb",
+        "#ffdcff",
+        "#f7a6de",
+        "#f3e4ff"
+      ],
+      "hue_mix": {
+        "pastel-pink": 160,
+        "deep-purple": 158,
+        "neutral-light": 130,
+        "pastel-purple": 109,
+        "neutral-dark": 88,
+        "mid-purple": 64,
+        "mid-pink": 39,
+        "mid-red-orange": 23
+      },
+      "fonts": [
+        "Outfit",
+        "Pixelify Sans",
+        "Fredoka",
+        "DM Sans",
+        "Orbitron",
+        "Playfair Display",
+        "Space Grotesk",
+        "Darumadrop One"
+      ],
+      "radii": [
+        "50%",
+        "999px",
+        "8px",
+        "22px",
+        "12px",
+        "14px"
+      ],
+      "glyphs": "",
+      "kaomoji_count": 0,
+      "cute_keyframes": [
+        "bgfloat",
+        "blink",
+        "blinkiepulse",
+        "blinkieshine",
+        "cardfloat",
+        "decopop",
+        "drift",
+        "flameglow",
+        "glowpulse",
+        "k2-float",
+        "k2-grain-drift",
+        "k2nodedrift",
+        "k3-bob",
+        "k3-twinkle",
+        "kambdrift",
+        "kambfloat",
+        "kambsway",
+        "ketdrift",
+        "ketglow",
+        "ketsway",
+        "ketwiggle",
+        "kv-wiggle",
+        "kw-drift",
+        "kw-fl-sway",
+        "kw-float",
+        "lanternglow",
+        "mascotbob",
+        "mascotfloat",
+        "pf-sway",
+        "popin"
+      ],
+      "cute_words": {
+        "mascot": 25,
+        "sparkle": 10,
+        "bunny": 6,
+        "doodle": 4,
+        "guestbook": 2
+      },
+      "features": {
+        "guestbook": true,
+        "webgl": true,
+        "pixel_font": true,
+        "reduced_motion": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://blushie.gg/",
+      "score": 40.4,
+      "palette": [
+        "#1f2a4d",
+        "#ffffff",
+        "#f4c8eb",
+        "#4a6ab5",
+        "#f1d3e8",
+        "#e3e9f6",
+        "#5d6482",
+        "#c8d2ea",
+        "#fdf2fa",
+        "#0e1120",
+        "#eef1fb",
+        "#d9dff0",
+        "#4f5677",
+        "#d9c7e8",
+        "#f6dcef",
+        "#d6dbea",
+        "#9aa3c4",
+        "#000000"
+      ],
+      "hue_mix": {
+        "deep-blue": 79,
+        "neutral-light": 49,
+        "pastel-pink": 48,
+        "mid-blue": 34,
+        "pastel-blue": 20,
+        "neutral": 8,
+        "mid-pink": 6,
+        "mid-green": 3
+      },
+      "fonts": [
+        "Google Sans Flex",
+        "DM Serif Display",
+        "Google Sans Flex\")"
+      ],
+      "radii": [
+        "8px",
+        "50%",
+        "22px",
+        "30px",
+        "28px",
+        "20px"
+      ],
+      "glyphs": "",
+      "kaomoji_count": 0,
+      "cute_keyframes": [
+        "bl-drift",
+        "m3-pop",
+        "svelte-19z82bi-pop",
+        "svelte-1ho7oxz-blink",
+        "svelte-1r3wzij-pop",
+        "svelte-1xo25ur-pop",
+        "vb-pop",
+        "vb-wiggle"
+      ],
+      "cute_words": {},
+      "features": {
+        "webgl": true,
+        "reduced_motion": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://rot.kim/",
+      "score": 36.1,
+      "palette": [
+        "#e8cf86",
+        "#ebe2d2",
+        "#f7f4ee",
+        "#a9b6ec",
+        "#0a090b",
+        "#09090a",
+        "#d8b86a",
+        "#f23f43",
+        "#f4df9e",
+        "#100f11",
+        "#000000",
+        "#0c0b0d",
+        "#eae4da",
+        "#ccc6bc",
+        "#9b958b",
+        "#6b7ac4",
+        "#98a6e4",
+        "#f1efe9"
+      ],
+      "hue_mix": {
+        "mid-red-orange": 30,
+        "pastel-red-orange": 26,
+        "neutral-dark": 15,
+        "pastel-yellow": 7,
+        "pastel-blue": 5,
+        "neutral": 2,
+        "mid-pink": 2,
+        "mid-blue": 1
+      },
+      "fonts": [
+        "DM Mono",
+        "Karla",
+        "Newsreader",
+        "Shippori Mincho",
+        "Zen Kaku Gothic New"
+      ],
+      "radii": [
+        "9999px",
+        "5px",
+        "8px",
+        "6px",
+        "4px",
+        "7px"
+      ],
+      "glyphs": "をしていますにサイトのみーきはやアプリドックツル",
+      "kaomoji_count": 0,
+      "cute_keyframes": [
+        "dotfloat",
+        "lyricfloat",
+        "railtwinkle",
+        "stardrifta",
+        "stardriftb",
+        "stardriftc"
+      ],
+      "cute_words": {
+        "sparkle": 8
+      },
+      "features": {
+        "webgl": true,
+        "music_player": true,
+        "reduced_motion": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://milproject.xyz/",
+      "score": 19.3,
+      "palette": [
+        "#555555",
+        "#0a0a0a",
+        "#c0c0c0",
+        "#aaaaaa",
+        "#6a6a6a",
+        "#222222",
+        "#ff9a3c",
+        "#ffffff",
+        "#cccccc",
+        "#888888",
+        "#3c3c3c",
+        "#b9600f",
+        "#ffaa00",
+        "#1e1e1e",
+        "#000000",
+        "#2a2c26",
+        "#171814",
+        "#5c7a4f"
+      ],
+      "hue_mix": {
+        "neutral": 46,
+        "neutral-dark": 28,
+        "mid-red-orange": 8,
+        "neutral-light": 5,
+        "mid-green": 2,
+        "pastel-red-orange": 1,
+        "pastel-yellow": 1
+      },
+      "fonts": [
+        "Minecraft",
+        "Pixelify Sans",
+        "Courier New",
+        "monospace"
+      ],
+      "radii": [
+        "0"
+      ],
+      "glyphs": "",
+      "kaomoji_count": 0,
+      "cute_keyframes": [],
+      "cute_words": {
+        "guestbook": 30
+      },
+      "features": {
+        "guestbook": true,
+        "webgl": true,
+        "pixel_font": true,
+        "image_rendering_pixelated": true,
+        "reduced_motion": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://lwsg.space/",
+      "score": 15.8,
+      "palette": [
+        "#ffffff",
+        "#000000",
+        "#a2acbc",
+        "#ececf2",
+        "#3f3f46",
+        "#bedaf5",
+        "#111117",
+        "#6e6e7d",
+        "#e8f1fb",
+        "#6fd394",
+        "#162536",
+        "#c3cedd",
+        "#697586",
+        "#78a5d7",
+        "#8b5cf6"
+      ],
+      "hue_mix": {
+        "neutral-light": 40,
+        "neutral-dark": 17,
+        "pastel-blue": 12,
+        "neutral": 8,
+        "mid-green": 1,
+        "deep-blue": 1,
+        "mid-blue": 1,
+        "mid-purple": 1
+      },
+      "fonts": [
+        "IBM Plex Mono",
+        "Font Awesome 6 Brands",
+        "Font Awesome 6 Free",
+        "Copnwree",
+        "SFMono-Regular"
+      ],
+      "radii": [
+        "6px",
+        "50%",
+        "16px",
+        "14px",
+        "6px!important",
+        "12px"
+      ],
+      "glyphs": "",
+      "kaomoji_count": 0,
+      "cute_keyframes": [],
+      "cute_words": {},
+      "features": {
+        "music_player": true,
+        "dark_mode": true
+      },
+      "depth": 0
+    },
+    {
+      "url": "https://ivy.rest/v2",
+      "score": 13.6,
+      "palette": [
+        "#000000",
+        "#ffffff",
+        "#b3b3b3",
+        "#e6e6e6",
+        "#8a8a8a",
+        "#9a9a9a",
+        "#a8a8a8",
+        "#777777",
+        "#8f8f8f",
+        "#b5b5b5",
+        "#e6eef2",
+        "#a0a0a0",
+        "#c9c9c9",
+        "#8aa393",
+        "#eeb6ad",
+        "#d6d6d6",
+        "#050505",
+        "#050807"
+      ],
+      "hue_mix": {
+        "neutral-dark": 58,
+        "neutral-light": 52,
+        "neutral": 41,
+        "pastel-blue": 1,
+        "pastel-pink": 1,
+        "deep-aqua": 1,
+        "pastel-yellow": 1,
+        "mid-pink": 1
+      },
+      "fonts": [
+        "Montserrat",
+        "Google Sans Flex",
+        "Rubik",
+        "Material Symbols Rounded"
+      ],
+      "radii": [
+        "var(--r-full)",
+        "var(--r-l)",
+        "var(--r-m)",
+        "var(--r-xl)",
+        "50%",
+        "var(--r-s)"
+      ],
+      "glyphs": "",
+      "kaomoji_count": 0,
+      "cute_keyframes": [
+        "cl-blink",
+        "cl-drift",
+        "cl-pop-in"
+      ],
+      "cute_words": {},
+      "features": {
+        "webgl": true,
+        "pixel_font": true,
+        "image_rendering_pixelated": true,
+        "reduced_motion": true
+      },
+      "depth": 0
+    }
+  ]
+}

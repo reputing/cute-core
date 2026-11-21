@@ -1,0 +1,69 @@
+{
+  "about": "Curated cutecore reference sites. 'role' says how the skill uses each one. 'anchor' is the house style the skill resembles most closely and then improves on. Add your own with the same shape; cute_scrape.py crawls outward from these.",
+  "sites": [
+    {
+      "url": "https://chessie.cat/guestbook/",
+      "role": "anchor",
+      "style": "sticker postcard",
+      "why": "The house style. Scalloped halftone awning header, die-cut sticker buttons with a 2px candy drop, stamp-perforated avatars, lined-paper form fields, postcard and cassette tape cards, tilted stamps, reaction pops, peeking mascot, warm grain, slow backdrop sparkles, full light and dark token sets, motion toggle, boot sequence.",
+      "reference": "references/house-style.md"
+    },
+    {
+      "url": "https://kuro.rip/",
+      "role": "target",
+      "style": "midnight cutecore page builder",
+      "why": "The site the work ships into. Users build profile pages with songs, guestbooks, chat, frames, nameplates, badges and custom css. New layouts and features land here.",
+      "reference": "references/kuro-rip.md"
+    },
+    {
+      "url": "https://schuh.wtf/",
+      "role": "reference",
+      "style": "dark anime dashboard profile",
+      "why": "Two row card grid (profile + now playing, about + recent streams), anime character lying across the top edge of a card, 88x31 stamp wall, anime digit view counter, live stats.fm and Lanyard data, local time with offset.",
+      "reference": "references/curated-sites.md#schuhwtf"
+    },
+    {
+      "url": "https://blushie.gg/",
+      "role": "reference",
+      "style": "curated feature trail",
+      "why": "Every feature card is a working miniature of the feature. Numbered scallop badges that morph on hover, cards alternating along a doodled wavy spine, one flavour per card (sky, navy, pink, white, periwinkle), keycaps you can press, a blob mascot peeking over a card, plain specific copy.",
+      "reference": "references/curated-sites.md#blushiegg"
+    },
+    {
+      "url": "https://ivy.rest/v2",
+      "role": "reference",
+      "style": "material 3 expressive lock screen",
+      "why": "The page is a device: widget tiles over a wallpaper, giant condensed clock, terminal fetch tile, stats in morphing M3 shapes (hexagon, pentagon, cookie), a full spatial vs effects spring motion token set, OGL wallpapers.",
+      "reference": "references/curated-sites.md#ivyrestv2"
+    },
+    {
+      "url": "https://lwsg.space/",
+      "role": "reference",
+      "style": "screen inside a screen",
+      "why": "Rounded inner screen inside a black bezel with a notch that holds the nav, animated mesh gradient canvas, one small mono block with an avatar stack and live view count.",
+      "reference": "references/curated-sites.md#lwsgspace"
+    },
+    {
+      "url": "https://milproject.xyz/",
+      "role": "reference",
+      "style": "3d pixel room",
+      "why": "The whole page is a WebGL room built from pixel textures (Minecraft-like), with a sign you read, free-look camera, arrow navigation between walls, a glb model, Lanyard now playing and a guestbook.",
+      "reference": "references/curated-sites.md#milprojectxyz"
+    },
+    {
+      "url": "https://rot.kim/",
+      "role": "reference",
+      "style": "full bleed art, quiet column",
+      "why": "Full viewport illustration dimmed under a narrow centred column: avatar with status dot, bio, Discord presence row, music tab with recent plays, tiny icon footer. Japanese-first copy, star drift and rail twinkle motion.",
+      "reference": "references/curated-sites.md#rotkim"
+    },
+    {
+      "url": "https://doll.gg/",
+      "role": "reference",
+      "style": "pastel link in bio",
+      "why": "Pastel pink link page with paw loader, pop-able bubbles with burst particles, fairy trail, glitter hearts, guided tour arrows, kaomoji and unicode sparkle copy, anonymous note box.",
+      "reference": "references/curated-sites.md#dollgg"
+    }
+  ],
+  "extra_seeds": []
+}

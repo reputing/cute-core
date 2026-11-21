@@ -1,0 +1,13 @@
+{
+  "name": "cute-core",
+  "owner": { "name": "reputing" },
+  "metadata": { "description": "The cutecore skill for Claude Code." },
+  "plugins": [
+    {
+      "name": "cutecore",
+      "source": "./",
+      "description": "Cutecore design engine: house style, 21st.dev icons and components, WebGL shaders and mascots, site reverse engineering, anti-slop gates, variants and taste memory.",
+      "version": "1.0.0"
+    }
+  ]
+}
